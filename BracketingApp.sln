@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BracketingApp", "BracketingApp\BracketingApp.csproj", "{0FEEE8BB-52B7-4861-9CD4-7036D7BB3779}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "BracketingFrontend", "BracketingFrontend\BracketingFrontend.esproj", "{ED5B10C9-4E08-48C7-905C-5DC32E030CEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FEEE8BB-52B7-4861-9CD4-7036D7BB3779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FEEE8BB-52B7-4861-9CD4-7036D7BB3779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FEEE8BB-52B7-4861-9CD4-7036D7BB3779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FEEE8BB-52B7-4861-9CD4-7036D7BB3779}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED5B10C9-4E08-48C7-905C-5DC32E030CEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED5B10C9-4E08-48C7-905C-5DC32E030CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED5B10C9-4E08-48C7-905C-5DC32E030CEF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ED5B10C9-4E08-48C7-905C-5DC32E030CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED5B10C9-4E08-48C7-905C-5DC32E030CEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED5B10C9-4E08-48C7-905C-5DC32E030CEF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E38E0251-3721-4A26-B3EB-E7975380EC69}
+	EndGlobalSection
+EndGlobal
