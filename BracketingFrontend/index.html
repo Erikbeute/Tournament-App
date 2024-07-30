@@ -1,21 +1,60 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bracketing App</title>
+    <link rel="stylesheet" href="style.css">-->
+ <!-- Update this path-->
+<!--</head>
+<body>
+    <h1>Bracketing App</h1>
+    <div>
+        <input type="text" id="participantName" placeholder="Enter participant name">
+        <button onclick="addParticipant()">Add Participant</button>-->
+ <!-- not yet working -->
+<!--<button onclick="fetchPairs()">Show Participants</button>
+        <button onclick="makeRandomPairs()">Make random Pairs</button>
+        <button onclick="recordResult(pairResult)">Post result from Pairs</button>
+
+    </div>
+    <div id="pairs"></div>
+    <script src="app.js"></script>
+</body>
+</html>-->
+<!--http://localhost:8080/BracketingFrontend/index.html-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bracketing App</title>
-    <link rel="stylesheet" href="style.css"> <!-- Update this path-->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Bracketing App</h1>
-    <div>
-        <input type="text" id="participantName" placeholder="Enter participant name">
-        <button onclick="addParticipant()">Add Participant</button> <!-- not yet working -->
-        <button onclick="fetchPairs()">Show Participants</button>
+    <div id="app">
+        <section>
+            <h2>Participants</h2>
+            <div id="participants"></div>
+            <input type="text" id="newParticipant" placeholder="Enter participant name">
+            <button onclick="addParticipant()">Add Participant</button>
+        </section>
+
+        <section>
+            <h2>Pairs</h2>
+            <button onclick="generateRandomPairs()">Generate Random Pairs</button>
+            <div id="pairs"></div>
+        </section>
+
+        <section>
+            <h2>Results</h2>
+            <div id="results"></div>
+            <button onclick="nextRound()">Next Round</button>
+        </section>
     </div>
-    <div id="pairs"></div>
     <script src="app.js"></script>
 </body>
 </html>
-
-<!--http://localhost:8080/BracketingFrontend/index.html-->
