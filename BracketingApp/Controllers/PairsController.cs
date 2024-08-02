@@ -1,8 +1,6 @@
 using BracketingApp.Models;
 using BracketingApp.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BracketingApp.Controllers
 {
@@ -10,23 +8,19 @@ namespace BracketingApp.Controllers
     [Route("api/[controller]")]
     public class PairsController : ControllerBase
     {
-        private static List<Pair<string, string>> _pairs = new List<Pair<string, string>>();
-        private static List<string> _individuals = new List<string>();
-        private static List<string> _winners = new List<string>();
-        private static List<string> _losers = new List<string>();
-        private static int _round = 0;
-
+        private readonly PairsService _pairsService;
         private readonly IndividualsService _individualsService;
 
-        public PairsController(IndividualsService individualsService)
+        public PairsController(PairsService pairsService, IndividualsService individualsService)
         {
+            _pairsService = pairsService;
             _individualsService = individualsService;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<string>> GetPersons()
         {
-            var individuals = _individualsService.GetIndividuals();
+            var individuals = _pairsService.GetIndividuals();
             return Ok(individuals);
         }
 
@@ -38,21 +32,14 @@ namespace BracketingApp.Controllers
                 return BadRequest("Person is null or empty.");
             }
 
-            _individualsService.AddIndividual(person);
+            _pairsService.AddIndividual(person);
             return Ok(person);
         }
 
         [HttpGet("getpairswithresults")]
         public ActionResult<IEnumerable<PairResultDto>> GetPairsWithResults()
         {
-            var resultPairs = _pairs.Select(p => new PairResultDto
-            {
-                First = p.First,
-                Second = p.Second,
-                Winner = _winners.Contains(p.First) ? p.First : (_winners.Contains(p.Second) ? p.Second : null),
-                Loser = _losers.Contains(p.First) ? p.First : (_losers.Contains(p.Second) ? p.Second : null)
-            }).ToList();
-
+            var resultPairs = _pairsService.GetPairsWithResults();
             return Ok(resultPairs);
         }
 
@@ -61,111 +48,51 @@ namespace BracketingApp.Controllers
         {
             if (updatedResultDto == null)
             {
-                return BadRequest("Result data is null.");
+                return BadRequest();
             }
 
-            var pair = _pairs.FirstOrDefault(p =>
-                (p.First == updatedResultDto.First && p.Second == updatedResultDto.Second) ||
-                (p.First == updatedResultDto.Second && p.Second == updatedResultDto.First));
+            var result = _pairsService.UpdatePairResult(updatedResultDto);
 
-            if (pair == null)
+            if (!result)
             {
-                return BadRequest("Pair not found.");
+                return BadRequest();
             }
 
-            if (updatedResultDto.First != updatedResultDto.Winner && updatedResultDto.Second != updatedResultDto.Winner)
-            {
-                return BadRequest("Winner must be one of the pair members.");
-            }
-
-            if (!_winners.Contains(updatedResultDto.Winner))
-            {
-                _winners.Add(updatedResultDto.Winner);
-            }
-
-            if (updatedResultDto.First != updatedResultDto.Loser && updatedResultDto.Second != updatedResultDto.Loser)
-            {
-                return BadRequest("Loser must be one of the pair members.");
-            }
-
-            if (!_losers.Contains(updatedResultDto.Loser))
-            {
-                _losers.Add(updatedResultDto.Loser);
-            }
-
-            return Ok(new { Message = "Pair result updated successfully." });
+            return Ok(new { Message = "Pair result updated." });
         }
-
 
         [HttpPost("nextround")]
         public ActionResult<IEnumerable<Pair<string, string>>> NextRound()
         {
-            _pairs.Clear();
-            _individuals = new List<string>(_winners);
-            _winners.Clear();
-            _losers.Clear();
-
-            _round++;
-
-            for (int i = 0; i < _individuals.Count; i += 2)
-            {
-                if (i + 1 < _individuals.Count)
-                {
-                    var pair = new Pair<string, string>(_individuals[i], _individuals[i + 1]);
-                    _pairs.Add(pair);
-                }
-            }
-
-            return Ok(_pairs);
+            var pairs = _pairsService.NextRound();
+            return Ok(pairs);
         }
 
         [HttpGet("getrandompairs")]
         public ActionResult<IEnumerable<PairResultDto>> GetRandomPairs()
         {
-            var individuals = _individualsService.GetIndividuals();
+            var randomPairs = _pairsService.GetRandomPairs();
 
-            if (individuals == null || !individuals.Any())
+            if (randomPairs == null || !randomPairs.Any())
             {
-                return BadRequest("No participants available to pair.");
+                return BadRequest();
             }
 
-            var random = new Random();
-            var shuffledIndividuals = individuals.OrderBy(x => random.Next()).ToList();
-
-            var pairs = new List<PairResultDto>();
-            for (int i = 0; i < shuffledIndividuals.Count; i += 2)
-            {
-                if (i + 1 < shuffledIndividuals.Count)
-                {
-                    pairs.Add(new PairResultDto
-                    {
-                        First = shuffledIndividuals[i],
-                        Second = shuffledIndividuals[i + 1]
-                    });
-                }
-                else
-                {
-                    pairs.Add(new PairResultDto
-                    {
-                        First = shuffledIndividuals[i],
-                        Second = null
-                    });
-                }
-            }
-
-            SavePairs(pairs.Select(p => new Pair<string, string>(p.First, p.Second)).ToList());
-            return Ok(pairs);
+            return Ok(randomPairs);
         }
 
+        //useful for debugging. 
         [HttpGet("getpairs")]
         public ActionResult<IEnumerable<Pair<string, string>>> GetPairs()
         {
-            if (!_pairs.Any())
+            var pairs = _pairsService.GetPairs();
+
+            if (pairs == null || !pairs.Any())
             {
                 return NoContent();
             }
 
-            return Ok(_pairs);
+            return Ok(pairs);
         }
 
         [HttpPost("savepairs")]
@@ -173,12 +100,21 @@ namespace BracketingApp.Controllers
         {
             if (pairs == null || !pairs.Any())
             {
-                return BadRequest("Pairs are null or empty.");
+                return BadRequest();
             }
 
-            _pairs = pairs;
+            _pairsService.SavePairs(pairs);
 
-            return Ok(new { Message = "Pairs saved successfully.", SavedPairs = _pairs });
+            return Ok(new { Message = "Pairs saved.", SavedPairs = pairs });
+        }
+
+
+        [HttpDelete("reset")]
+        public ActionResult DeleteAll()
+        {
+            _pairsService.DeletePairs();
+            _pairsService.ClearIndividuals();
+            return Ok(new { Message = "All participants and pairs deleted." });
         }
     }
 }

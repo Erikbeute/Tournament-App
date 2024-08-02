@@ -10,7 +10,7 @@ h1 {
 }
 
 #app {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     background: white;
@@ -25,7 +25,7 @@ section {
 button {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #28a745;
+    background-color: #0066b2;
     border: none;
     color: white;
     border-radius: 5px;
@@ -33,7 +33,7 @@ button {
 }
 
     button:hover {
-        background-color: #218838;
+        background-color: #005b9f;
     }
 
 input {
@@ -46,4 +46,8 @@ input {
 
 #participants, #pairs, #results {
     margin-top: 10px;
+}
+
+#result-section{
+    display:none;
 }

@@ -17,6 +17,7 @@
             }
         }
 
+        // not yet in use. 
         public void RemoveIndividual(string person)
         {
             if (!string.IsNullOrWhiteSpace(person))
@@ -25,6 +26,13 @@
             }
         }
 
+        public List<string> ClearIndividuals()
+        {
+            _individuals.Clear();
+            return _individuals; 
+        }
+
+        //not yet in use
         public void EditIndividual(string oldName, string newName)
         {
             if (!string.IsNullOrWhiteSpace(oldName) && !string.IsNullOrWhiteSpace(newName))
@@ -37,6 +45,7 @@
             }
         }
 
+        // not yet in use.
         public string DisplayList()
         {
             return string.Join(", ", _individuals);
