@@ -12,9 +12,3 @@ The main objective of this project is to create a simple bracketing system where
 - Track results of pairs and determine winners and losers.
 - Advance through multiple rounds of pairing.
 - Clear all pairs and individuals.
-
-##To-do and improve
-- A lot of styling
-- Solution for odd-numbers
-- possibilities to participate with 'teams' of 3 (e.g. 3 vs 2).
-- ... 
