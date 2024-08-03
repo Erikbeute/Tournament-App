@@ -1,7 +1,7 @@
-# Bracketing App
+# Tournament App
 
 ## Overview
-The Bracketing App is a project designed to serve as an exercise and hobby project in C#, JavaScript, and API programming. The main objective of this project is to create a bracketing system where pairs of individuals (or teams) can be matched, and results can be tracked through multiple rounds.
+The Tournament App (Bracketing App) is a project designed to serve as an exercise and hobby project in C#, JavaScript, and API programming. The main objective of this project is to create a bracketing system where pairs of individuals (or teams) can be matched, and results can be tracked through multiple rounds.
 
 ## Features
 - Add and retrieve individuals.
