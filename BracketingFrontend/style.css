@@ -1,12 +1,33 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Verdana, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
+background-color: lightgray;
+
+/*    background-image: url('Images/BGtriangle.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+*/
+}
+p {
+    font-family: Verdana;
+}
+
+#title{
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 20px;
+
 }
 
 h1 {
-    color: #333;
+    font-family: Verdana;
+    color: black;
+    text-align: center;
 }
 
 #app {
@@ -15,8 +36,34 @@ h1 {
     padding: 20px;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
+
+#selectBox {
+    width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    color: #333;
+    cursor: pointer;
+    background-image: url('data:image/svg+xml,%3Csvg width="10" height="10" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath fill="%23000000" d="M0 0l5 5 5-5z"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 10px 10px;
+}
+
+    #selectBox:focus {
+        border-color: #0066b2;
+        box-shadow: 0 0 5px rgba(0, 102, 178, 0.5);
+        outline: none;
+    }
+
+
 
 section {
     margin-bottom: 20px;
@@ -30,6 +77,7 @@ button {
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
     button:hover {
@@ -42,12 +90,21 @@ input {
     border: 1px solid #ccc;
     margin-right: 10px;
     width: calc(100% - 130px);
+    font-size: 16px;
 }
 
 #participants, #pairs, #results {
     margin-top: 10px;
+    font-size: 16px;
+    font-family:  Verdana; 
 }
 
 #result-section{
     display:none;
+}
+
+#theWinner{
+    font-size: 22px;
+    font-weight: bold; 
+    color: green;
 }

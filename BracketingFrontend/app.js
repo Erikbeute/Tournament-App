@@ -56,7 +56,7 @@ function displayPairs(pairs) {
         <div>
             <p>${pair.first} - ${pair.second || 'No opponent'}</p>
             <label>Winner: 
-                <select onchange="updateResult('${pair.first}', '${pair.second || ''}', this.value)">
+                <select id="selectBox" onchange="updateResult('${pair.first}', '${pair.second || ''}', this.value)">
                     <option value="">Select winner</option>
                     <option value="${pair.first}">${pair.first}</option>
                     ${pair.second ? `<option value="${pair.second}">${pair.second}</option>` : ''}
@@ -93,11 +93,19 @@ function fetchResults() {
         .then(response => response.json())
         .then(data => {
             const resultsContainer = document.getElementById('results');
+
+            //when the last (final) has been done. 
+            if (data.length === 1 && data[0].winner) {
+                resultsContainer.innerHTML = `<p id="theWinner">Winner: ${data[0].winner}</p>`;
+            }
+
+            else {
             resultsContainer.innerHTML = data.map(result => `
                 <div>
                     <p>${result.first} vs ${result.second || 'No opponent'} - Winner: ${result.winner || 'N/A'}</p>
                 </div>
             `).join('');
+            }
         })
         .catch(error => console.error('Error fetching results:', error));
 }

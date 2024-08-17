@@ -109,7 +109,7 @@ namespace BracketingApp.Services
                     pairs.Add(new PairResultDto
                     {
                         First = shuffledIndividuals[i],
-                        Second = null
+                        Second = "No partner"
                     });
                 }
             }
